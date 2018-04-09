@@ -1,0 +1,8 @@
+<h3>Balance</h3>
+<div *ngIf="balance">
+  <p>Card number: {{balance.cardNumber}}</p>
+  <p>Date: {{balance.date}}</p>
+  <p>Balance: {{balance.amount.integer}}.<sup>{{balance.amount.integer}}</sup></p>
+</div>
+<button>return</button>
+<button>exit</button>

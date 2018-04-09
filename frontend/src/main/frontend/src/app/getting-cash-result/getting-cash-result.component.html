@@ -1,0 +1,9 @@
+<h3>Getting cash result</h3>
+<div *ngIf="withdrawalResult">
+  <p>Card number: {{withdrawalResult.cardNumber}}</p>
+  <p>Date and time: {{withdrawalResult.date}}</p>
+  <p>Withdrawn amount:  {{withdrawalResult.amount.integer}}.<sup>{{withdrawalResult.amount.integer}}</sup></p>
+  <p>Balance: {{withdrawalResult.balance.integer}}.<sup>{{withdrawalResult.balance.integer}}</sup></p>
+</div>
+<button (click)="submit()">return</button>
+<button (click)="quit()">quit</button>

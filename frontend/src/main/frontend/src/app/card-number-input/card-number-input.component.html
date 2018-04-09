@@ -1,0 +1,6 @@
+<h3>Input card number</h3>
+<p><b>Card number:</b></p>
+<input type="text" size="40" disabled [ngModel]="cardNumberLabel">
+<virtual-keyboard (buttonPress)="onClick($event)"></virtual-keyboard>
+<button (click)="submit()">ok</button>
+<button (click)="clear()">clear</button>
