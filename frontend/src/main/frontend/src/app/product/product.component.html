@@ -1,0 +1,56 @@
+<div *ngIf="product">
+  <tr>
+    <td>
+      <img width="200px" height="200px" src="{{product.imageUrl}}"/>
+    </td>
+    <td>
+      <b>{{product.name}}</b>
+      <p>{{product.description}}</p>
+    </td>
+  </tr>
+</div>
+
+<table>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <td><button (click)="rate(1)">1</button></td>
+          <td><button (click)="rate(2)">2</button></td>
+          <td><button (click)="rate(3)">3</button></td>
+          <td><button (click)="rate(4)">4</button></td>
+          <td><button (click)="rate(5)">5</button></td>
+          <td>{{rateComment}}</td>
+        </tr>
+      </table>
+    </td>
+    <td rowspan="2">
+      <button (click)="sendFeedback()">Оставить отзыв</button>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="text" size="40" [(ngModel)]="comment"></td>
+  </tr>
+</table>
+
+<div *ngIf="feedbackResult">
+  <b *ngIf="feedbackResult.averageRating">
+    Средняя оценка: {{feedbackResult.averageRating}}
+  </b>
+  <b *ngIf="!feedbackResult.averageRating">
+    У товара нет оценок
+  </b>
+  <br>
+  <br>
+  <b *ngIf="feedbackResult.comments">
+    Комментарии:
+  </b>
+  <b *ngIf="!feedbackResult.comments">
+    Комментариев нет
+  </b>
+  <ul>
+    <li *ngFor="let comment of feedbackResult.comments">
+      {{comment}}
+    </li>
+  </ul>
+</div>

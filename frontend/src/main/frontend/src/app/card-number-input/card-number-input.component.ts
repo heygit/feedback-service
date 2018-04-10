@@ -36,19 +36,6 @@ export class CardNumberInputComponent implements OnInit {
   }
 
   submit(): void {
-    this.authService.checkCard(this.cardNumber)
-      .then((status) => {
-        if (status == 'ok') {
-          this.router.navigate(['input-pin']);
-        } else if (status == 'locked') {
-          this.router.navigate(['error', 'cardLocked', 'input-card']);
-        } else if (status == 'notFound') {
-          this.router.navigate(['error', 'cartNotFound', 'input-card']);
-        }
-      })
-      .catch(() => {
-        this.router.navigate(['error']);
-      });
   }
 
 }

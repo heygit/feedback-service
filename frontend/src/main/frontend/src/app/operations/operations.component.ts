@@ -25,7 +25,6 @@ export class OperationsComponent implements OnInit {
 
   quit(): void {
     this.authService.logout();
-    this.authService.deleteAllCookies();
     this.router.navigate(['']);
   }
 

@@ -13,7 +13,7 @@ export class PaymentService {
 
   getBalance(): Promise<BalanceModel> {
     let params = new URLSearchParams();
-    return this.httpService.post('api/v1/paymentManagement/getBalance', params)
+    return this.httpService.post('api/v1/paymentManagement/getBalance', null, params)
       .toPromise()
       .then(response => {
         return response.json().balance as BalanceModel;
@@ -24,7 +24,7 @@ export class PaymentService {
   getCash(amount: string): Promise<WithdrawalResultModel> {
     let params = new URLSearchParams();
     params.append('amount', amount);
-    return this.httpService.post('api/v1/paymentManagement/getCash', params)
+    return this.httpService.post('api/v1/paymentManagement/getCash', null, params)
       .toPromise()
       .then(response => {
         let body = response.json();
@@ -38,7 +38,7 @@ export class PaymentService {
 
   getWithdrawalResult(): Promise<WithdrawalResultModel> {
     let params = new URLSearchParams();
-    return this.httpService.post('api/v1/paymentManagement/getWithdrawalResult', params)
+    return this.httpService.post('api/v1/paymentManagement/getWithdrawalResult', null, params)
       .toPromise()
       .then(response => {
         if (response.json().withdrawalResult == null) {

@@ -3,7 +3,9 @@ package project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.model.internal.Block;
-import project.model.internal.BlockChain;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static project.service.BlockService.DIFFICULTY;
 
@@ -13,30 +15,16 @@ public class BlockChainService {
     @Autowired
     private static BlockService blockService;
 
-//    создаем транзакцию
+    private List<Block> myBlocks = new ArrayList<>();
 
-//    genesisTransaction = new Transaction(coinbase.publicKey, walletA.publicKey, 100f);
-
-//    подписываем транзакцию
-//    genesisTransaction.generateSignature(coinbase.privateKey);
-
-//    проставляем айди транзакции
-//    genesisTransaction.transactionId = "0"; //manually set the transaction id
-
-//    добавляем транзакцию в блок
-//    genesis.addTransaction(genesisTransaction);
-
-//    добавляем блок в цепочку
-//    addBlock(genesis);
-
-    public static Boolean isChainValid(BlockChain blockChain) {
+    public static Boolean isChainValid(List<Block> blockChain) {
         Block currentBlock;
         Block previousBlock;
         String hashTarget = new String(new char[DIFFICULTY]).replace('\0', '0');
 
-        for (int i = 1; i < blockChain.getBlocks().size(); i++) {
-            currentBlock = blockChain.getBlocks().get(i);
-            previousBlock = blockChain.getBlocks().get(i - 1);
+        for (int i = 1; i < blockChain.size(); i++) {
+            currentBlock = blockChain.get(i);
+            previousBlock = blockChain.get(i - 1);
             //compare registered hash and calculated hash:
             if (!currentBlock.getHash().equals(blockService.calculateHash(currentBlock))) {
                 System.out.println("#Current Hashes not equal");
@@ -55,11 +43,5 @@ public class BlockChainService {
         }
         System.out.println("Blockchain is valid");
         return true;
-    }
-
-    public void addBlock(BlockChain blockChain, Block block) {
-        int nonce = blockService.mineBlock(block);
-        block.setNonce(nonce);
-        blockChain.getBlocks().add(block);
     }
 }

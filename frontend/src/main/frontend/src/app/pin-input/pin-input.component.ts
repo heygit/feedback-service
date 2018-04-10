@@ -40,19 +40,6 @@ export class PinInputComponent implements OnInit {
   }
 
   submit(): void {
-    this.authService.checkPin(this.pin)
-      .then((status) => {
-        if (status == 'ok') {
-          this.router.navigate(['operations']);
-        } else if (status == 'wrongPin') {
-          this.router.navigate(['error', 'wrongPin', 'input-pin']);
-        } else if (status == 'cardLocked') {
-          this.router.navigate(['error', 'cardLocked', 'input-card']);
-        }
-      })
-      .catch(() => {
-        this.router.navigate(['error']);
-      });
   }
 
 }

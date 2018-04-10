@@ -1,31 +1,23 @@
-package project.model.internal;
+package project.model.external;
 
 public class Feedback {
 
-    private int mark;
+    private Integer mark;
     private String comment;
 
-    public Feedback(int mark, String comment) {
+    public Feedback(Integer mark, String comment) {
         this.mark = mark;
-        this.comment = comment;
-    }
-
-    public Feedback(int mark) {
-        this.mark = mark;
-    }
-
-    public Feedback(String comment) {
         this.comment = comment;
     }
 
     public Feedback() {
     }
 
-    public int getMark() {
+    public Integer getMark() {
         return mark;
     }
 
-    public void setMark(int mark) {
+    public void setMark(Integer mark) {
         this.mark = mark;
     }
 

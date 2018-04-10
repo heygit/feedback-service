@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import project.filter.SessionIdHandlerLog4jFilter;
 
-import static project.constants.ParamValues.ALL_URLS_PATTERN;
-
 @Configuration
 public class FilterConfig {
+
+    private static final String ALL_URLS_PATTERN = "/*";
 
     @Bean
     public FilterRegistrationBean registerSessionIdHandlerLog4jFilter() {

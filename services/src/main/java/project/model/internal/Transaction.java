@@ -1,50 +1,52 @@
 package project.model.internal;
 
+import project.model.external.Feedback;
+
 import java.security.PublicKey;
 
 public class Transaction {
 
-    private String transactionId; //Contains a hash of transaction*
-    private PublicKey sender; //Senders address/public key.
-    private PublicKey reciepient; //Recipients address/public key.
-    private float value; //Contains the amount we wish to send to the recipient.
-    private byte[] signature; //This is to prevent anybody else from spending funds in our wallet.
+    private String hash;
+    private PublicKey user;
+    private long productId;
+    private Feedback value;
+    private byte[] signature;
 
-    public Transaction(PublicKey from, PublicKey to, float value) {
-        this.sender = from;
-        this.reciepient = to;
+    public Transaction(PublicKey user, long productId, Feedback value) {
+        this.user = user;
+        this.productId = productId;
         this.value = value;
     }
 
-    public String getTransactionId() {
-        return transactionId;
+    public String getHash() {
+        return hash;
     }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
-    public PublicKey getSender() {
-        return sender;
+    public PublicKey getUser() {
+        return user;
     }
 
-    public void setSender(PublicKey sender) {
-        this.sender = sender;
+    public void setUser(PublicKey user) {
+        this.user = user;
     }
 
-    public PublicKey getReciepient() {
-        return reciepient;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setReciepient(PublicKey reciepient) {
-        this.reciepient = reciepient;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
-    public float getValue() {
+    public Feedback getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(Feedback value) {
         this.value = value;
     }
 

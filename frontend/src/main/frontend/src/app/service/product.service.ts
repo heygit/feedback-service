@@ -3,30 +3,29 @@ import {HttpService} from "./http.service";
 import {URLSearchParams} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
+import {Product} from "../model/product";
 
 @Injectable()
-export class AuthService {
+export class ProductService {
 
   constructor(private httpService: HttpService) {}
 
-  login(username: string, password: string): Promise<boolean> {
+  getProducts(): Promise<Product[]> {
     let params = new URLSearchParams();
-    params.append('username', username);
-    params.append('password', password);
-    return this.httpService.post('api/v1/authManagement/login', null, params)
+    return this.httpService.get('api/v1/productManagement', params)
       .toPromise()
       .then(response => {
-        return response.status == 200;
+        return response.json().products as Product[];
       })
       .catch(this.handleError);
   }
 
-  logout(): Promise<boolean> {
+  getProduct(productId: number): Promise<Product> {
     let params = new URLSearchParams();
-    return this.httpService.post('api/v1/authManagement/logout', null, params)
+    return this.httpService.get('api/v1/productManagement/' + productId, params)
       .toPromise()
       .then(response => {
-        return response.status == 200;
+        return response.json().product as Product;
       })
       .catch(this.handleError);
   }

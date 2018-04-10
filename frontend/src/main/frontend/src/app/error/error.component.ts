@@ -11,13 +11,11 @@ export class ErrorComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   message: string = '';
-  url: string = '';
 
   ngOnInit(): void {
     this.route.params
       .subscribe((params: Params) => {
         this.message = this.getMessage(params['code']);
-        this.url = this.getRedirectUrl(params['redirect']);
       });
   }
 
@@ -33,18 +31,6 @@ export class ErrorComponent implements OnInit {
     }
 
     return 'Something went wrong';
-  }
-
-  getRedirectUrl(redirect): string {
-    if (redirect == null) {
-      return '';
-    }
-
-    return redirect;
-  }
-
-  return() {
-    this.navigate(this.url);
   }
 
   toMain() {

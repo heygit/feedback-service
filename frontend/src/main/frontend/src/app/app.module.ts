@@ -17,6 +17,10 @@ import {OperationsComponent} from "./operations/operations.component";
 import {AuthService} from "./service/auth.service";
 import {HttpService} from "./service/http.service";
 import {PaymentService} from "./service/payment.service";
+import {ProductService} from "./service/product.service";
+import {ProductsComponent} from "./products/products.component";
+import {ProductComponent} from "./product/product.component";
+import {FeedbackService} from "./service/feedback.service";
 
 
 @NgModule({
@@ -28,6 +32,8 @@ import {PaymentService} from "./service/payment.service";
   ],
   declarations: [
     AppComponent,
+    ProductsComponent,
+    ProductComponent,
     BalanceComponent,
     CardNumberInputComponent,
     ErrorComponent,
@@ -40,6 +46,8 @@ import {PaymentService} from "./service/payment.service";
   providers: [
     AuthService,
     PaymentService,
+    ProductService,
+    FeedbackService,
     HttpService
   ],
   bootstrap: [AppComponent]

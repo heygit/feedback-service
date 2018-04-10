@@ -3,31 +3,29 @@ import {HttpService} from "./http.service";
 import {URLSearchParams} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
+import {Product} from "../model/product";
+import {FeedbackResult} from "../model/feedback-result";
+import {Feedback} from "../model/feedback";
 
 @Injectable()
-export class AuthService {
+export class FeedbackService {
 
   constructor(private httpService: HttpService) {}
 
-  login(username: string, password: string): Promise<boolean> {
+  getFeebacksByProductId(productId: number): Promise<FeedbackResult> {
     let params = new URLSearchParams();
-    params.append('username', username);
-    params.append('password', password);
-    return this.httpService.post('api/v1/authManagement/login', null, params)
+    return this.httpService.get('api/v1/feedbackManagement/product/' + productId, params)
       .toPromise()
       .then(response => {
-        return response.status == 200;
+        return response.json().feedbackResult as FeedbackResult;
       })
       .catch(this.handleError);
   }
 
-  logout(): Promise<boolean> {
+  postFeedback(productId: number, feedback: Feedback): Promise<void> {
     let params = new URLSearchParams();
-    return this.httpService.post('api/v1/authManagement/logout', null, params)
+    return this.httpService.post('api/v1/feedbackManagement/product/' + productId, feedback, params)
       .toPromise()
-      .then(response => {
-        return response.status == 200;
-      })
       .catch(this.handleError);
   }
 

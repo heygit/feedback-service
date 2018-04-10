@@ -6,7 +6,9 @@ import project.model.internal.Block;
 import project.model.internal.Transaction;
 import project.utils.StringUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BlockService {
@@ -15,6 +17,8 @@ public class BlockService {
 
     @Autowired
     private TranscationService transcationService;
+
+    private List<Block> myBlocks = new ArrayList<>();
 
     public Block createBlock(String previousHash) {
         long timeStamp = new Date().getTime();
@@ -49,8 +53,7 @@ public class BlockService {
         return nonce;
     }
 
-    //Add transactions to this block
-    public boolean addTransaction(Block block, Transaction transaction) {
+    public boolean addTransactionToBlock(Block block, Transaction transaction) {
         if (!transcationService.verifySignature(transaction)) {
             return false;
         }
@@ -58,5 +61,27 @@ public class BlockService {
         block.getTransactions().add(transaction);
         System.out.println("Transaction Successfully added to Block");
         return true;
+    }
+
+    public boolean addTransaction(Transaction transaction) {
+        return addTransactionToBlock(getLastBlock(), transaction);
+    }
+
+
+    public Block createGenesisBlock() {
+        return createBlock(null);
+    }
+
+    public void saveBlock(Block block) {
+        //blockRepository.save(block) todo
+        myBlocks.add(block);
+    }
+
+    public Block getLastBlock() {
+        if (myBlocks.isEmpty()) {
+            saveBlock(createGenesisBlock());
+        }
+
+        return myBlocks.get(myBlocks.size() - 1);
     }
 }
