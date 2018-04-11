@@ -11,6 +11,7 @@ import project.service.ProductService;
 import java.util.Collections;
 import java.util.Map;
 
+import static project.constants.ParamNames.CATEGORIES_KEY;
 import static project.constants.ParamNames.PRODUCTS_KEY;
 import static project.constants.ParamNames.PRODUCT_KEY;
 
@@ -25,6 +26,12 @@ public class ProductController {
     @ResponseBody
     public Map<String, Object> getProducts() {
         return Collections.singletonMap(PRODUCTS_KEY, productService.getProcucts());
+    }
+
+    @RequestMapping(value = "/category", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getCategories() {
+        return Collections.singletonMap(CATEGORIES_KEY, productService.getCategories());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

@@ -2,7 +2,13 @@ package project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.converter.ProductConverter;
+import project.entity.ProductEntity;
+import project.model.external.Category;
 import project.model.external.Product;
+import project.repository.CategoryRepository;
+import project.repository.ProductRepository;
+import project.utils.ConverterHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,37 +18,26 @@ import java.util.List;
 public class ProductService {
 
     @Autowired
-    private TranscationService transcationService;
+    private ProductRepository productRepository;
+
     @Autowired
-    private BlockService blockService;
-
-    private static List<Product> products = new ArrayList<>();
-
-    static {
-        products.add(new Product(1, "Iphone 7", "Дисплей Retina HD\n" +
-                "Широкоформатный ЖК‑дисплей Multi‑Touch с диагональю 4 дюйма и технологией IPS\n" +
-                "Multi‑Touch с технологией IPS",
-                "https://avatars.mds.yandex.net/get-mpic/397397/img_id8407956531717956576.jpeg/9hq", 3));
-        products.add(new Product(2, "Iphone 8", "Дисплей Retina HD\n" +
-                "Широкоформатный ЖК‑дисплей Multi‑Touch с диагональю 4 дюйма и технологией IPS\n" +
-                "Multi‑Touch с технологией IPS",
-                "https://avatars.mds.yandex.net/get-mpic/397397/img_id8407956531717956576.jpeg/9hq", 2));
-        products.add(new Product(3, "Iphone X", "Дисплей Retina HD\n" +
-                "Широкоформатный ЖК‑дисплей Multi‑Touch с диагональю 4 дюйма и технологией IPS\n" +
-                "Multi‑Touch с технологией IPS",
-                "https://avatars.mds.yandex.net/get-mpic/397397/img_id8407956531717956576.jpeg/9hq", 3));
-    }
+    private CategoryRepository categoryRepository;
 
     public List<Product> getProcucts() {
-        return products;
+        return ConverterHelper.convert(productRepository.findAll(), ProductConverter::createProductFromEntity);
+    }
+
+    public List<Category> getCategories() {
+        return ConverterHelper.convert(categoryRepository.findAll(), ProductConverter::createCategoryFromEntity);
     }
 
     public Product getProcuctById(long productId) {
-        return products.stream().filter(elem -> elem.getId() == productId).findAny().get();
+        return ProductConverter.createProductFromEntity(productRepository.findOne(productId));
     }
 
     public List<Product> getProcuctsByCategory(long categoryId) {
-        return Collections.singletonList(products.get(0));
+        return ConverterHelper.convert(productRepository.findByCategory_Id(categoryId),
+                ProductConverter::createProductFromEntity);
     }
 
 }

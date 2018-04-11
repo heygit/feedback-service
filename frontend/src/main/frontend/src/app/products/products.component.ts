@@ -23,8 +23,17 @@ export class ProductsComponent implements OnInit {
       });
   }
 
+  updateProducts(categoryId: number): void {
+    this.productService.getProductsByCategory(categoryId)
+      .then((products) => {
+        this.products = products;
+      })
+      .catch(() => {
+        this.router.navigate(['error']);
+      });
+  }
+
   gotoDetail(product: Product): void {
     this.router.navigate(['/product', product.id]);
   }
-
 }

@@ -12,6 +12,9 @@ public class FeedbackResult {
         this.averageRating = averageRating;
     }
 
+    public FeedbackResult() {
+    }
+
     public List<String> getComments() {
         return comments;
     }

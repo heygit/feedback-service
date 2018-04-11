@@ -2,6 +2,7 @@ package project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import project.model.external.Feedback;
 import project.model.external.FeedbackResult;
 import project.model.internal.Account;
@@ -20,12 +21,14 @@ public class FeedbackService {
     @Autowired
     private AccountService accountService;
 
+    @Transactional
     public void addFeedback(long userId, long productId, Feedback feedback) {
         Account account = accountService.getAccount(userId);
         Transaction transaction = transcationService.processTransaction(account, productId, feedback);
         blockService.addTransaction(transaction);
     }
 
+    @Transactional(readOnly = true)
     public FeedbackResult getFeedbackResult(long productId) {
         List<Feedback> feedbacks = transcationService.getTransactions().stream()
                 .filter(elem -> elem.getProductId() == productId)

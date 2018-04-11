@@ -4,6 +4,7 @@ import {URLSearchParams} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
 import {Product} from "../model/product";
+import {Category} from "../model/category";
 
 @Injectable()
 export class ProductService {
@@ -16,6 +17,26 @@ export class ProductService {
       .toPromise()
       .then(response => {
         return response.json().products as Product[];
+      })
+      .catch(this.handleError);
+  }
+
+  getProductsByCategory(categoryId: number): Promise<Product[]> {
+    let params = new URLSearchParams();
+    return this.httpService.get('api/v1/productManagement/category/' + categoryId, params)
+      .toPromise()
+      .then(response => {
+        return response.json().products as Product[];
+      })
+      .catch(this.handleError);
+  }
+
+  getCategories(): Promise<Category[]> {
+    let params = new URLSearchParams();
+    return this.httpService.get('api/v1/productManagement/category', params)
+      .toPromise()
+      .then(response => {
+        return response.json().categories as Category[];
       })
       .catch(this.handleError);
   }

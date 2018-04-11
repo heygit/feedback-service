@@ -42,10 +42,10 @@
   </b>
   <br>
   <br>
-  <b *ngIf="feedbackResult.comments">
+  <b *ngIf="feedbackResult.comments.length > 0">
     Комментарии:
   </b>
-  <b *ngIf="!feedbackResult.comments">
+  <b *ngIf="feedbackResult.comments.length == 0">
     Комментариев нет
   </b>
   <ul>

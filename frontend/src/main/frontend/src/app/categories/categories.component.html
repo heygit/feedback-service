@@ -1,0 +1,6 @@
+<h3>Категории</h3>
+<div *ngIf="categories">
+  <div *ngFor="let category of categories">
+    <a href="" onclick="return false" (click)="showProducts(category.id)">{{category.name}}</a>
+  </div>
+</div>

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Map;
 
+import static project.constants.ParamNames.IS_AUTHORIZED_KEY;
+
 @Controller
 @RequestMapping("/api/v1/authManagement")
 public class AuthController {
@@ -35,6 +37,12 @@ public class AuthController {
         }
 
         return Collections.emptyMap();
+    }
+
+    @RequestMapping(value = "check", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> check() {
+        return Collections.singletonMap(IS_AUTHORIZED_KEY, authSessionBean.isAuthorized());
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.POST)

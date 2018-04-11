@@ -12,6 +12,14 @@ public class Transaction {
     private Feedback value;
     private byte[] signature;
 
+    public Transaction(String hash, PublicKey user, long productId, Feedback value, byte[] signature) {
+        this.hash = hash;
+        this.user = user;
+        this.productId = productId;
+        this.value = value;
+        this.signature = signature;
+    }
+
     public Transaction(PublicKey user, long productId, Feedback value) {
         this.user = user;
         this.productId = productId;

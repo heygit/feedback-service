@@ -1,15 +1,24 @@
-<h3>Товары</h3>
-<div *ngIf="products">
-  <div *ngFor="let product of products">
-    <tr>
-      <td>
-        <img width="200px" height="200px" src="{{product.imageUrl}}"/>
-      </td>
-      <td>
-        <b>{{product.name}}</b>
-        <p>{{product.description}}</p>
-        <button (click)="gotoDetail(product)">Подробнее</button>
-      </td>
-    </tr>
-  </div>
-</div>
+<table>
+  <tr>
+    <td width="200px" valign="top">
+      <categories (selectCategory)="updateProducts($event)"></categories>
+    </td>
+    <td width="700px" valign="top">
+      <h3 align="center">Товары</h3>
+      <div *ngIf="products">
+        <div *ngFor="let product of products">
+          <tr>
+            <td>
+              <img width="200px" height="200px" src="{{product.imageUrl}}"/>
+            </td>
+            <td>
+              <b>{{product.name}}</b>
+              <p>{{product.description}}</p>
+              <button (click)="gotoDetail(product)">Подробнее</button>
+            </td>
+          </tr>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -1,21 +1,48 @@
-package project.model.internal;
+package project.entity;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Block {
+@Entity
+public class BlockEntity {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "hash")
     private String hash;
+
+    @Column(name = "previous_hash")
     private String previousHash;
-    private List<Transaction> transactions;
+
+    @OneToMany(mappedBy = "blockEntity")
+    private List<TransactionEntity> transactions = new ArrayList<>();
+
+    @Column(name = "timestamp")
     private long timeStamp;
+
+    @Column(name = "nonce")
     private int nonce;
 
-    public Block(String hash, String previousHash, List<Transaction> transactions, long timeStamp, int nonce) {
+    public BlockEntity(String hash, String previousHash, long timeStamp, int nonce) {
         this.hash = hash;
         this.previousHash = previousHash;
-        this.transactions = transactions;
         this.timeStamp = timeStamp;
         this.nonce = nonce;
+    }
+
+    public BlockEntity() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getHash() {
@@ -34,11 +61,11 @@ public class Block {
         this.previousHash = previousHash;
     }
 
-    public List<Transaction> getTransactions() {
+    public List<TransactionEntity> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<Transaction> transactions) {
+    public void setTransactions(List<TransactionEntity> transactions) {
         this.transactions = transactions;
     }
 

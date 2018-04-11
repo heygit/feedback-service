@@ -25,10 +25,7 @@ public class FeedbackController {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> getFeedbacksByProduct(@PathVariable("id") long productId) {
-//        return Collections.singletonMap(FEEDBACK_RESULT_KEY, feedbackService.getFeedbackResult(productId));
-        List<String> comments = Arrays.asList("класс", "клесс");
-        FeedbackResult result = new FeedbackResult(comments, 8D);
-        return Collections.singletonMap(FEEDBACK_RESULT_KEY, result);
+        return Collections.singletonMap(FEEDBACK_RESULT_KEY, feedbackService.getFeedbackResult(productId));
     }
 
     @RequestMapping(value = "/product/{id}", method = RequestMethod.POST)

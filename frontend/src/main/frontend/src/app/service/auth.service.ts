@@ -21,6 +21,16 @@ export class AuthService {
       .catch(this.handleError);
   }
 
+  isAuthorized(): Promise<boolean> {
+    let params = new URLSearchParams();
+    return this.httpService.get('api/v1/authManagement/check', params)
+      .toPromise()
+      .then(response => {
+        return response.json().isAuthorized;
+      })
+      .catch(this.handleError);
+  }
+
   logout(): Promise<boolean> {
     let params = new URLSearchParams();
     return this.httpService.post('api/v1/authManagement/logout', null, params)

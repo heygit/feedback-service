@@ -9,7 +9,7 @@ public class Runner {
     public static void main(String[] args) {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
-        Object[] configs = {MainConfig.class, FilterConfig.class, CorsConfig.class};
+        Object[] configs = {MainConfig.class, ServicesConfig.class, FilterConfig.class, CorsConfig.class};
         String[] argsArray = {};
         SpringApplication.run(configs, argsArray);
     }

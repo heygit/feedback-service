@@ -49,7 +49,7 @@ export class ProductComponent implements OnInit {
 
     this.feedbackService.postFeedback(this.product.id, feedback)
       .then(() => {
-        this.router.navigate(['']);
+        this.router.navigate(['products']);
       })
       .catch(() => {
         this.router.navigate(['error']);
