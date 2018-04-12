@@ -11,9 +11,7 @@ import project.service.ProductService;
 import java.util.Collections;
 import java.util.Map;
 
-import static project.constants.ParamNames.CATEGORIES_KEY;
-import static project.constants.ParamNames.PRODUCTS_KEY;
-import static project.constants.ParamNames.PRODUCT_KEY;
+import static project.constants.ParamNames.*;
 
 @Controller
 @RequestMapping("/api/v1/productManagement")

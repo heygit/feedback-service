@@ -5,6 +5,7 @@ import {Product} from "../model/product";
 import {FeedbackResult} from "../model/feedback-result";
 import {FeedbackService} from "../service/feedback.service";
 import {Feedback} from "../model/feedback";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'product',
@@ -19,7 +20,8 @@ export class ProductComponent implements OnInit {
   comment: string;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-              private productService: ProductService, private feedbackService: FeedbackService) {}
+              private productService: ProductService, private feedbackService: FeedbackService,
+              private authService: AuthService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -59,7 +61,6 @@ export class ProductComponent implements OnInit {
   rate(mark: number): void {
     this.rateNumber = mark;
     this.rateComment = this.getRateComment(mark);
-    this.comment = this.comment;
   }
 
   getRateComment(mark: number): string {
@@ -75,5 +76,9 @@ export class ProductComponent implements OnInit {
       return 'Отлично';
     }
     return null;
+  }
+
+  toMainPage(): void {
+    this.router.navigate(['products']);
   }
 }

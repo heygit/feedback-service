@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import project.service.AccountService;
 import project.service.AuthSessionBean;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,29 +14,28 @@ import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.Map;
 
-import static project.constants.ParamNames.IS_AUTHORIZED_KEY;
+import static project.constants.ParamNames.*;
 
 @Controller
 @RequestMapping("/api/v1/authManagement")
 public class AuthController {
 
-    private final AuthSessionBean authSessionBean;
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
-    public AuthController(AuthSessionBean authSessionBean) {
-        this.authSessionBean = authSessionBean;
-    }
+    private AuthSessionBean authSessionBean;
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> login(HttpServletRequest request) {
-        Long userId = 123L;//TODO
-        if (userId != null) {
-            invalidateSession(request);
-            request.getSession(true);
-            authSessionBean.setAuthorized(true);
-            authSessionBean.setAccountId(userId);
-        }
+    public Map<String, Object> login(@RequestParam(USERNAME_KEY) String username,
+                                     @RequestParam(PASSWORD_KEY) String password, HttpServletRequest request) {
+        long userId = accountService.authorize(username, password);
+
+        invalidateSession(request);
+        request.getSession(true);
+        authSessionBean.setAuthorized(true);
+        authSessionBean.setAccountId(userId);
 
         return Collections.emptyMap();
     }

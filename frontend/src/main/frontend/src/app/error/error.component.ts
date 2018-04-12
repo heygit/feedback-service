@@ -21,16 +21,12 @@ export class ErrorComponent implements OnInit {
 
   getMessage(code): string {
     if (code == null) {
-      return 'Something went wrong';
-    } else if (code == 'cardLocked') {
-      return 'Card locked';
-    } else if (code == 'cartNotFound') {
-      return 'Card not found';
-    } else if (code == 'wrongPin') {
-      return 'Wrong Pin';
+      return 'Что-то пошло не так...';
+    } else if (code == 'notAuthorized') {
+      return 'Пользователь не авторизован';
     }
 
-    return 'Something went wrong';
+    return 'Что-то пошло не так...';
   }
 
   toMain() {

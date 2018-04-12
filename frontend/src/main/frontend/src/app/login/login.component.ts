@@ -24,4 +24,16 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['error']);
       });
   }
+
+  login(): void {
+    this.authService.login(this.username, this.password)
+      .then((isAuthorized) => {
+        if (isAuthorized) {
+          this.router.navigate(['products']);
+        }
+      })
+      .catch(() => {
+        this.router.navigate(['error', 'notAuthorized']);
+      });
+  }
 }

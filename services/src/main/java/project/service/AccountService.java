@@ -2,7 +2,11 @@ package project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import project.entity.AccountEntity;
 import project.model.internal.Account;
+import project.repository.AccountRepository;
+import project.utils.StringUtil;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -13,7 +17,7 @@ import java.security.spec.ECGenParameterSpec;
 public class AccountService {
 
     @Autowired
-    private TranscationService transcationService;
+    private AccountRepository accountRepository;
 
     public Account createAccount() {
         try {
@@ -30,8 +34,18 @@ public class AccountService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Account getAccount(long userId) {
-        return createAccount();
+        AccountEntity accountEntity = accountRepository.findOne(userId);
+        return new Account(accountEntity.getPrivateKey(), accountEntity.getPublicKey());
     }
 
+    @Transactional(readOnly = true)
+    public long authorize(String username, String password) {
+        AccountEntity accountEntity = accountRepository.findByUsername(username);
+        if (accountEntity.getHashedPassword().equals(StringUtil.applySha256(password))) {
+            return accountEntity.getId();
+        }
+        throw new RuntimeException("Invalid credentials");
+    }
 }

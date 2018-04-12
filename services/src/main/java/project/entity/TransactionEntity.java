@@ -30,7 +30,7 @@ public class TransactionEntity {
     private byte[] signature;
 
     @ManyToOne
-    @JoinColumn(name = "block_entity")
+    @JoinColumn(name = "block")
     private BlockEntity blockEntity;
 
     public TransactionEntity(String hash, PublicKey user, long productId, FeedbackEntity value, byte[] signature,

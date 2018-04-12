@@ -8,6 +8,10 @@ import project.model.external.FeedbackResult;
 import project.model.internal.Account;
 import project.model.internal.Transaction;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +56,7 @@ public class FeedbackService {
         }
 
         double average = marks.stream().reduce(0, Integer::sum) / (double) marks.size();
+        average = new BigDecimal(average, MathContext.DECIMAL64).setScale(2, RoundingMode.HALF_UP).doubleValue();
         result.setAverageRating(average);
 
         return result;
