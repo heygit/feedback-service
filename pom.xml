@@ -11,7 +11,7 @@
     <modules>
         <module>services</module>
         <module>backend</module>
-        <!--<module>frontend</module>-->
+        <module>frontend</module>
         <module>launcher</module>
     </modules>
 

@@ -2,7 +2,7 @@ package project.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "feedback")
 public class FeedbackEntity {
 
     @Id

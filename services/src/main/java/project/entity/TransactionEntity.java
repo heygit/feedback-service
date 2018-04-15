@@ -3,7 +3,7 @@ package project.entity;
 import javax.persistence.*;
 import java.security.PublicKey;
 
-@Entity
+@Entity(name = "transaction")
 public class TransactionEntity {
 
     @Id
@@ -30,7 +30,7 @@ public class TransactionEntity {
     private byte[] signature;
 
     @ManyToOne
-    @JoinColumn(name = "block")
+    @JoinColumn(name = "block_id")
     private BlockEntity blockEntity;
 
     public TransactionEntity(String hash, PublicKey user, long productId, FeedbackEntity value, byte[] signature,

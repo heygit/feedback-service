@@ -39,5 +39,4 @@ public class ProductService {
         return ConverterHelper.convert(productRepository.findByCategory_Id(categoryId),
                 ProductConverter::createProductFromEntity);
     }
-
 }

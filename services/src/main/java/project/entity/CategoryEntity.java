@@ -2,7 +2,7 @@ package project.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "category")
 public class CategoryEntity {
 
     @Id

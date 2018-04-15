@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-@Entity
+@Entity(name = "account")
 public class AccountEntity {
 
     @Id
