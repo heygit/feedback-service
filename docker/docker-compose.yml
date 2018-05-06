@@ -1,0 +1,25 @@
+version: '2.1'
+services:
+
+# PostgreSQL
+  feedbackservice-db:
+    container_name: feedbackservice-db
+    build: postgres
+    ports:
+      - 5555:5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      
+# Feedback service
+  feedbackservice:
+    container_name: feedbackservice
+    build: feedbackservice
+    restart: always
+    ports:
+      - 8080:8080
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"      
+        
