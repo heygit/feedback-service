@@ -15,6 +15,7 @@ import {ProductComponent} from "./product/product.component";
 import {FeedbackService} from "./service/feedback.service";
 import {CategoriesComponent} from "./categories/categories.component";
 import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {LoginComponent} from "./login/login.component";
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     ProductsComponent,
     CategoriesComponent,
     ProductComponent,

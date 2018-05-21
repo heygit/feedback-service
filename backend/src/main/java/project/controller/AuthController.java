@@ -40,6 +40,15 @@ public class AuthController {
         return Collections.emptyMap();
     }
 
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> register(@RequestParam(USERNAME_KEY) String username,
+                                        @RequestParam(PASSWORD_KEY) String password) {
+        accountService.register(username, password);
+
+        return Collections.emptyMap();
+    }
+
     @RequestMapping(value = "check", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> check() {

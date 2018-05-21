@@ -36,4 +36,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['error', 'notAuthorized']);
       });
   }
+
+  register(): void {
+    this.router.navigate(['register']);
+  }
 }

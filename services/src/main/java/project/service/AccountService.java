@@ -48,4 +48,15 @@ public class AccountService {
         }
         throw new RuntimeException("Invalid credentials");
     }
+
+    @Transactional
+    public void register(String username, String password) {
+        AccountEntity accountEntity = accountRepository.findByUsername(username);
+        if (accountEntity != null) {
+            throw new RuntimeException("User already exists");
+        }
+        String hashedPassword = StringUtil.applySha256(password);
+        Account account = createAccount();
+        accountRepository.save(new AccountEntity(username, hashedPassword, account.getPrivateKey(), account.getPublicKey()));
+    }
 }

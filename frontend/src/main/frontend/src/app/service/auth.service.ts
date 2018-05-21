@@ -21,6 +21,18 @@ export class AuthService {
       .catch(this.handleError);
   }
 
+  register(username: string, password: string): Promise<boolean> {
+    let params = new URLSearchParams();
+    params.append('username', username);
+    params.append('password', password);
+    return this.httpService.post('api/v1/authManagement/register', null, params)
+      .toPromise()
+      .then(response => {
+        return response.status == 200;
+      })
+      .catch(this.handleError);
+  }
+
   isAuthorized(): Promise<boolean> {
     let params = new URLSearchParams();
     return this.httpService.get('api/v1/authManagement/check', params)

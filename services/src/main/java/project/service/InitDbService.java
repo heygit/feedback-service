@@ -2,14 +2,11 @@ package project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project.entity.AccountEntity;
 import project.entity.CategoryEntity;
 import project.entity.ProductEntity;
-import project.model.internal.Account;
 import project.repository.AccountRepository;
 import project.repository.CategoryRepository;
 import project.repository.ProductRepository;
-import project.utils.StringUtil;
 
 import javax.annotation.PostConstruct;
 
@@ -66,15 +63,8 @@ public class InitDbService {
                 "приготовление капучино; защита от перегрева; трафареты для рисунков на молочной пене; мерная ложечка",
                 "https://avatars.mds.yandex.net/get-mpic/175985/img_id3292059662984109492.jpeg/9hq", category));
 
-        addUser("111111", "111111");
-        addUser("222222", "222222");
-        addUser("333333", "333333");
+        accountService.register("111111", "111111");
+        accountService.register("222222", "222222");
+        accountService.register("333333", "333333");
     }
-
-    private void addUser(String username, String password) {
-        String hashedPassword = StringUtil.applySha256(password);
-        Account account = accountService.createAccount();
-        accountRepository.save(new AccountEntity(username, hashedPassword, account.getPrivateKey(), account.getPublicKey()));
-    }
-
 }

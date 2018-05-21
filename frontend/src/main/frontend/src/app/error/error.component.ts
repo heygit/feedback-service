@@ -23,7 +23,9 @@ export class ErrorComponent implements OnInit {
     if (code == null) {
       return 'Что-то пошло не так...';
     } else if (code == 'notAuthorized') {
-      return 'Пользователь не авторизован';
+      return 'Не удалось авторизовать';
+    } else if (code == 'notRegistered') {
+      return 'Не удалось зарегистрировать';
     }
 
     return 'Что-то пошло не так...';

@@ -1,0 +1,25 @@
+<h2>Регистрация</h2>
+<table>
+  <tr>
+    <td width="130px">ФИО:</td>
+    <td><input type="text" size="40"></td>
+  </tr>
+  <tr>
+    <td>Логин:</td>
+    <td><input type="text" size="40" [(ngModel)]="username"></td>
+  </tr>
+  <tr>
+    <td>Пароль:</td>
+    <td><input type="text" size="40" [(ngModel)]="password"></td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td>
+      <button (click)="register()">Зарегистрироваться</button>
+    </td>
+    <td>
+      <button (click)="login()">Войти</button>
+    </td>
+  </tr>
+</table>
